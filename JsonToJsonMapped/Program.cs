@@ -36,7 +36,8 @@ namespace JsonToJsonMapped
             
             
             Console.WriteLine("");
-            Console.WriteLine($"Tempo de execução: {stopWatch.Elapsed.Seconds} segundos");
+            Console.WriteLine(
+                $"Tempo de execução: {stopWatch.Elapsed.Seconds} segundos");
 
             stopWatch.Restart();
             
@@ -62,7 +63,8 @@ namespace JsonToJsonMapped
             
             
             Console.WriteLine("");
-            Console.WriteLine($"Tempo de execução: {stopWatch.Elapsed.Seconds} segundos");
+            Console.WriteLine(
+                $"Tempo de execução: {stopWatch.Elapsed.Seconds} segundos");
             Console.ReadKey();
         }
 
