@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Newtonsoft.Json;
@@ -11,9 +12,20 @@ namespace JsonToJsonMapped
         public static string Bind(
             JObject[] json, Dictionary<string, string> dict)
         {
+            foreach (var item in dict
+                .Where(item => !json.Properties()
+                    .Any(x => x.Name
+                        .Equals(
+                            item.Key, 
+                            StringComparison.InvariantCultureIgnoreCase))))
+            {
+                dict.Remove(item.Key);
+            }
+            
             foreach (var prop in json.Properties().ToArray())
             {
-                if (!dict.Keys.Any(x => x.Contains(prop.Name)))
+                if (!dict.Keys.Any(x => x.Equals(
+                    prop.Name, StringComparison.InvariantCultureIgnoreCase)))
                 {
                     prop.Remove();
                     continue;
@@ -29,6 +41,16 @@ namespace JsonToJsonMapped
         public static string Bind(
             JObject json, Dictionary<string, string> dict)
         {
+            foreach (var item in dict
+                .Where(item => !json.Properties()
+                    .Any(x => x.Name
+                        .Equals(
+                            item.Key, 
+                            StringComparison.InvariantCultureIgnoreCase))))
+            {
+                dict.Remove(item.Key);
+            }
+            
             foreach (var prop in json.Properties().ToArray())
             {
                 if (!dict.Keys.Any(x => x.Contains(prop.Name)))
